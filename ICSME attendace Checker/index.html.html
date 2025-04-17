@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ICSME Attendance Checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body { font-family: sans-serif; padding: 20px; text-align: center; }
+      input { padding: 10px; width: 80%; font-size: 16px; }
+      button { padding: 10px 20px; font-size: 16px; margin-top: 10px; }
+      .result { margin-top: 20px; font-size: 20px; font-weight: bold; }
+    </style>
+  </head>
+  <body>
+    <h2>Check In</h2>
+    <input type="text" id="input" placeholder="Enter your email or phone" />
+    <br>
+    <button onclick="check()">Submit</button>
+    <div class="result" id="result"></div>
+
+    <script>
+      async function check() {
+        const value = document.getElementById('input').value.trim();
+        const resultDiv = document.getElementById('result');
+        resultDiv.textContent = "Checking...";
+        const response = await fetch(`https://script.google.com/macros/s/AKfycbzypDFqqmfCe-0ca1dE9hRpJvlLXcgWNF8tUlOitSNpDmV3nZYtAd-rPcoaM5ijRK5M/exec?input=${encodeURIComponent(value)}`);
+        const text = await response.text();
+        resultDiv.textContent = text;
+      }
+    </script>
+  </body>
+</html>
